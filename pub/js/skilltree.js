@@ -11,6 +11,8 @@ class SkillTree {
     free = false,
   }) {
     this.canvas = canvas;
+    this.canvas.width = 0;
+    this.canvas.height = 0;
     this.ctx = this.canvas.getContext("2d");
     this.title = title;
     this.desc = desc;
@@ -26,71 +28,68 @@ class SkillTree {
     this.distance = 100;
 
     //below code ensures that the canvas isn't blurry (hopefully)
-
-    const dpr = window.devicePixelRatio || 1;
-    const bsr =
-      this.ctx.webkitBackingStorePixelRatio ||
-      this.ctx.mozBackingStorePixelRatio ||
-      this.ctx.msBackingStorePixelRatio ||
-      this.ctx.oBackingStorePixelRatio ||
-      this.ctx.backingStorePixelRatio ||
-      1;
-    const ratio = dpr / bsr;
-
-    this.canvas.width = 500 * ratio;
-    this.canvas.height = 1000 * ratio;
-    this.canvas.style.width = 500 + "px";
-    this.canvas.style.height = 1000 + "px";
-    this.ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-    this.trueCanvasWidth = parseInt(this.canvas.style.width, 10);
   }
 
   initialize() {
-    this.ctx.font = "32px Arial";
-    this.ctx.textAlign = "center";
-
-    //const titleWidth = this.ctx.measureText(this.title).width;
-    this.ctx.fillText(this.title, this.trueCanvasWidth / 2, 25);
-
-    if (!this.free) {
-      this.ctx.font = "20px Arial";
-      this.ctx.fillText(this.pointsText, this.trueCanvasWidth / 2, 50);
-    }
-
     if (this.root != null) {
       this.root.zerothWalk(null, this, 0);
       this.root.firstWalk();
       this.root.secondWalk();
+
+      //*This code ensures that the canvas is sharp on all devices... hopefully*/
+      const dpr = window.devicePixelRatio || 1;
+      const bsr =
+        this.ctx.webkitBackingStorePixelRatio ||
+        this.ctx.mozBackingStorePixelRatio ||
+        this.ctx.msBackingStorePixelRatio ||
+        this.ctx.oBackingStorePixelRatio ||
+        this.ctx.backingStorePixelRatio ||
+        1;
+      const ratio = dpr / bsr;
+
+      this.canvas.style.width = this.canvas.width + "px";
+      this.canvas.style.height = this.canvas.height + "px";
+      this.canvas.width *= ratio;
+      this.canvas.height *= ratio;
+      this.trueCanvasWidth = parseInt(this.canvas.style.width, 10);
+
+      this.ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      //*********/
+
+      this.ctx.font = "bold 36px Trebuchet MS";
+      this.ctx.textAlign = "center";
+
+      //const titleWidth = this.ctx.measureText(this.title).width;
+      this.ctx.lineWidth = 2;
+      this.ctx.fillStyle = "white";
+      this.ctx.fillText(this.title, this.trueCanvasWidth / 2, 32);
+      this.ctx.strokeText(this.title, this.trueCanvasWidth / 2, 32);
+
+      if (!this.free) {
+        this.ctx.fillStyle = "black";
+        this.ctx.font = "bold 20px Trebuchet MS";
+        this.ctx.fillText(this.pointsText, this.trueCanvasWidth / 2, 60);
+      }
+
+      console.log(this.canvas);
+
       this.root.thirdWalk();
     }
 
     this.ctx.fillStyle = "darkblue";
-    this.ctx.fillRect(
-      this.root.rect.x,
-      this.root.rect.y,
-      this.root.rect.height,
-      this.root.rect.width
-    );
-
-    this.ctx.lineWidth = 2;
-    this.ctx.strokeRect(
-      this.root.rect.x,
-      this.root.rect.y,
-      this.root.rect.height,
-      this.root.rect.width
-    );
+    this.root.drawPerk();
   }
 
   addPoints(points) {
     if (!this.free) {
       this.points += points;
-      const textMeasure = this.ctx.measureText(this.pointsText);
-      console.log(textMeasure);
+      //   const textMeasure = this.ctx.measureText(this.pointsText);
+      //   console.log(textMeasure);
       this.ctx.fillStyle = "black";
-      this.ctx.clearRect(0, 33, this.trueCanvasWidth, 20);
+      this.ctx.clearRect(0, 41, this.trueCanvasWidth, 25);
       this.pointsText = "Points: " + this.points.toString();
-      this.ctx.fillText(this.pointsText, this.trueCanvasWidth / 2, 50);
+      this.ctx.font = "bold 20px Trebuchet MS";
+      this.ctx.fillText(this.pointsText, this.trueCanvasWidth / 2, 60);
     }
   }
 }
@@ -269,13 +268,20 @@ class Perk {
     this.children.forEach((perk) => {
       perk.secondWalk(m + this.mod);
     });
-    this.x += m;
+    this.x += m + 20;
+
+    if (this.x + 100 > this.parentTree.canvas.width) {
+      this.parentTree.canvas.width = this.x + 70;
+    }
+    if (this.level * 85 + 70 + 65 > this.parentTree.canvas.height) {
+      this.parentTree.canvas.height = this.level * 85 + 60 + 65;
+    }
   }
 
   thirdWalk() {
     this.rect = {
-      x: this.x + this.parentTree.trueCanvasWidth / 2 - 75,
-      y: this.level * 75 + 60,
+      x: this.x,
+      y: this.level * 85 + 70,
       height: 50,
       width: 50,
     };
@@ -287,6 +293,7 @@ class Perk {
     //console.log(this.rect);
 
     if (this.parent !== null) {
+      this.parentTree.ctx.lineWidth = 1.5;
       this.parentTree.ctx.beginPath();
       this.parentTree.ctx.moveTo(
         this.parent.rect.x + 25,
@@ -296,21 +303,7 @@ class Perk {
       this.parentTree.ctx.stroke();
     }
 
-    this.parentTree.ctx.fillStyle = "darkred";
-    this.parentTree.ctx.fillRect(
-      this.rect.x,
-      this.rect.y,
-      this.rect.height,
-      this.rect.width
-    );
-
-    this.parentTree.ctx.lineWidth = 2;
-    this.parentTree.ctx.strokeRect(
-      this.rect.x,
-      this.rect.y,
-      this.rect.height,
-      this.rect.width
-    );
+    this.drawPerk("darkred");
 
     this.parentTree.canvas.addEventListener("click", (e) => {
       const pos = {
@@ -333,13 +326,21 @@ class Perk {
     );
   }
 
-  drawPerk() {
+  drawPerk(background) {
+    this.parentTree.ctx.fillStyle = background;
     this.parentTree.ctx.fillRect(
       this.rect.x,
       this.rect.y,
       this.rect.width,
       this.rect.height
     );
+    if (this.image.length !== 0) {
+      const img = new Image();
+      img.onload = () => {
+        this.parentTree.ctx.drawImage(img, this.rect.x, this.rect.y, 50, 50);
+      };
+      img.src = this.image;
+    }
     this.parentTree.ctx.lineWidth = 2;
     this.parentTree.ctx.strokeRect(
       this.rect.x,
@@ -347,6 +348,37 @@ class Perk {
       this.rect.height,
       this.rect.width
     );
+    if (!this.parentTree.free) {
+      this.parentTree.ctx.font = "12px Trebuchet MS";
+      this.parentTree.ctx.fillStyle = "white";
+      this.parentTree.ctx.fillText(
+        this.cost.toString(),
+        this.rect.x + 42,
+        this.rect.y + 47
+      );
+    }
+    if (this.title.length !== 0) {
+      this.parentTree.ctx.font = "bold 16px Trebuchet MS";
+      //   this.parentTree.ctx.fillStyle = "grey";
+      //   this.parentTree.ctx.globalAlpha = 0.5;
+      //   this.parentTree.ctx.fillRect(this.rect.x - 2, this.rect.y + 50, 52, 15);
+      //   this.parentTree.ctx.globalAlpha = 1.0;
+      this.parentTree.ctx.fillStyle = "black";
+      //   this.parentTree.ctx.strokeRect(this.rect.x, this.rect.y + 50, 50, 15);
+      this.parentTree.ctx.clearRect(this.rect.x - 5, this.rect.y + 52, 60, 16);
+      this.parentTree.ctx.lineWidth = 1;
+      this.parentTree.ctx.fillText(
+        this.title,
+        this.rect.x + 25,
+        this.rect.y + 64
+      );
+      //   this.parentTree.ctx.strokeText(
+      //     this.title,
+      //     this.rect.x + 25,
+      //     this.rect.y + 64
+      //   );
+    }
+    //this.parentTree.ctx.fillStyle = fillStyle;
   }
 
   invest() {
@@ -365,26 +397,22 @@ class Perk {
               return -1;
             }
           }
-          this.parentTree.ctx.fillStyle = "darkred";
           this.children.forEach((perk) => {
-            perk.drawPerk();
+            perk.drawPerk("darkred");
           });
         }
 
         this.parentTree.addPoints(this.cost);
         this.invested = false;
-        this.parentTree.ctx.fillStyle = "darkblue";
-        this.drawPerk();
+        this.drawPerk("darkblue");
       } else if (this.invested) {
         return -1;
       } else {
         this.parentTree.addPoints(-this.cost);
         this.invested = true;
-        this.parentTree.ctx.fillStyle = "darkgreen";
-        this.drawPerk();
-        this.parentTree.ctx.fillStyle = "darkblue";
+        this.drawPerk("darkgreen");
         this.children.forEach((perk) => {
-          perk.drawPerk();
+          perk.drawPerk("darkblue");
         });
         return this.cost;
       }
@@ -400,24 +428,20 @@ class Perk {
               return -1;
             }
           }
-          this.parentTree.ctx.fillStyle = "darkred";
           this.children.forEach((perk) => {
-            perk.drawPerk();
+            perk.drawPerk("darkred");
           });
         }
 
         this.invested = false;
-        this.parentTree.ctx.fillStyle = "darkblue";
-        this.drawPerk();
+        this.drawPerk("darkblue");
       } else if (this.invested) {
         return -1;
       } else {
         this.invested = true;
-        this.parentTree.ctx.fillStyle = "darkgreen";
-        this.drawPerk();
-        this.parentTree.ctx.fillStyle = "darkblue";
+        this.drawPerk("darkgreen");
         this.children.forEach((perk) => {
-          perk.drawPerk();
+          perk.drawPerk("darkblue");
         });
       }
     }

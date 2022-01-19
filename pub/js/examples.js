@@ -2,14 +2,18 @@
 
 const TestTree = new SkillTree({
   canvas: document.getElementById("canvas"),
-  title: "Test",
-  points: 5,
+  title: "Sample Skill Tree",
+  points: 500,
   root: new Perk({
+    image: "https://freesvg.org/img/Sword-Grayscale.png",
+    cost: 10,
+    title: "Attack 1",
     children: [
       new Perk({
         children: [new Perk({})],
       }),
       new Perk({
+        title: "JHksdjfKH",
         children: [
           new Perk({
             children: [
@@ -20,6 +24,9 @@ const TestTree = new SkillTree({
           }),
         ],
       }),
+      new Perk({ children: [new Perk({})] }),
+      new Perk({ cost: 99 }),
+      new Perk({ children: [new Perk({})] }),
     ],
   }),
 });
