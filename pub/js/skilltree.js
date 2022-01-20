@@ -302,9 +302,10 @@ class Perk {
       //   let canvasBounds = this.parentTree.canvas.getBoundingRect();
       //   let scaleX = this.parentTree.canvas.width / canvasBounds.width;
       //   let scaleY = this.parentTree.canvas.height / canvasBounds.height;
+      const canvasRect = this.parentTree.canvas.getBoundingClientRect();
       const pos = {
-        x: e.clientX,
-        y: e.clientY,
+        x: e.clientX - canvasRect.left,
+        y: e.clientY - canvasRect.top,
       };
 
       if (this.isIntersect(pos)) {
