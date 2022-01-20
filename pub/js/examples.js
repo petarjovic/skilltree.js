@@ -1,34 +1,68 @@
 "use strict";
 
-const TestTree = new SkillTree({
+const skillTree = new SkillTree({
   canvas: document.getElementById("canvas"),
   title: "Sample Skill Tree",
-  points: 500,
+  // free: true,
+  // respec: true,
+  points: 10,
   root: new Perk({
-    image: "https://freesvg.org/img/Sword-Grayscale.png",
-    cost: 10,
     title: "Attack 1",
+    image: "https://freesvg.org/img/Sword-Grayscale.png",
     children: [
       new Perk({
-        children: [new Perk({})],
-      }),
-      new Perk({
-        title: "JHksdjfKH",
+        title: "Attack 2",
+        image: "https://freesvg.org/img/Sword-Grayscale.png",
         children: [
           new Perk({
+            title: "Attack 3",
+            image: "https://freesvg.org/img/Sword-Grayscale.png",
             children: [
               new Perk({
-                children: [new Perk({}), new Perk({})],
+                title: "Attack 4",
+                image: "https://freesvg.org/img/Sword-Grayscale.png",
+                children: [
+                  new Perk({
+                    title: "Attack 5",
+                    image: "https://freesvg.org/img/Sword-Grayscale.png",
+                  }),
+                ],
               }),
             ],
           }),
         ],
       }),
-      new Perk({ children: [new Perk({})] }),
-      new Perk({ cost: 99 }),
-      new Perk({ children: [new Perk({})] }),
+      new Perk({
+        title: "Attack Speed",
+        image: "https://freesvg.org/img/Wind--NicholasJudy456.png",
+        children: [
+          new Perk({
+            title: "AS 2",
+            image: "https://freesvg.org/img/Wind--NicholasJudy456.png",
+            children: [
+              new Perk({
+                title: "AS 3",
+                image: "https://freesvg.org/img/Wind--NicholasJudy456.png",
+              }),
+              new Perk({
+                title: "AS 4",
+                image: "https://freesvg.org/img/Wind--NicholasJudy456.png",
+              }),
+              new Perk({
+                title: "AS 5",
+                image: "https://freesvg.org/img/9va-Cartoon_Tornado.png",
+                cost: 4,
+              }),
+            ],
+          }),
+          new Perk({
+            title: "Multi Hit",
+            image: "https://freesvg.org/img/9va-Cartoon_Tornado.png",
+          }),
+        ],
+      }),
     ],
   }),
 });
 
-TestTree.initialize();
+skillTree.initialize();

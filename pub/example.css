@@ -1,4 +1,178 @@
-* {
-    margin: 0;
-    padding: 0;
+.examples {
+  display: none;
+  z-index: 1;
+}
+
+.docs {
+  display: none;
+  text-align: left;
+}
+
+.heading {
+  font-weight: 600;
+  font-size: larger;
+  color: rgb(247, 86, 28);
+}
+
+.sub-heading {
+  font-weight: 500;
+  color: rgb(247, 151, 117);
+}
+
+.emphasis {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.code {
+  background-color: #333;
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .2);
+}
+
+.code-highlight {
+  color: rgb(92, 132, 255);
+}
+
+.code-highlight2 {
+  color: olivedrab;
+}
+
+.code-highlight3 {
+  color: rgb(67, 223, 223);
+}
+
+.code-highlight4 {
+  color: rgb(211, 76, 76);
+}
+
+.code-highlight5 {
+  color: rgb(238, 238, 74);
+}
+
+.example1 {
+  display: inline-block;
+  z-index: 33;
+}
+
+.example2 {
+  display: inline-block;
+  z-index: 33;
+}
+
+.options {
+  color: rgb(67, 223, 223);
+  font-weight: 600;
+}
+
+.suboptions {
+  font-style: italic;
+}
+
+
+/* The CSS below is courtesy of the bootstrap cover template by @mdo (twitter) */
+
+/*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #fff;
+  border: .05rem solid #fff;
+}
+
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  background-color: rgb(22, 74, 126);
+}
+
+body {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  color: #fff;
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+}
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+.masthead {
+  margin-bottom: 2rem;
+}
+
+.masthead-brand {
+  margin-bottom: 0;
+}
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+@media (min-width: 48em) {
+  .masthead-brand {
+    float: left;
   }
+  .nav-masthead {
+    float: right;
+  }
+}
+
+
+/*
+ * Cover
+ */
+.cover {
+  padding: 0 1.5rem;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  font-weight: 700;
+}
+
+
+/*
+ * Footer
+ */
+.mastfoot {
+  color: rgba(255, 255, 255, .5);
+}
