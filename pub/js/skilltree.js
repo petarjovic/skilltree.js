@@ -37,23 +37,16 @@ class SkillTree {
       this.root.secondWalk();
 
       //*This code ensures that the canvas is sharp on all devices... hopefully*/
-      const dpr = window.devicePixelRatio || 1;
-      const bsr =
-        this.ctx.webkitBackingStorePixelRatio ||
-        this.ctx.mozBackingStorePixelRatio ||
-        this.ctx.msBackingStorePixelRatio ||
-        this.ctx.oBackingStorePixelRatio ||
-        this.ctx.backingStorePixelRatio ||
-        1;
-      const ratio = dpr / bsr;
+      const ratio = window.devicePixelRatio;
 
       this.canvas.style.width = this.canvas.width + "px";
       this.canvas.style.height = this.canvas.height + "px";
       this.canvas.width *= ratio;
       this.canvas.height *= ratio;
+
       this.trueCanvasWidth = parseInt(this.canvas.style.width, 10);
 
-      this.ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      this.ctx.scale(ratio, ratio);
       //*********/
 
       this.ctx.font = "bold 36px Trebuchet MS";
@@ -273,8 +266,8 @@ class Perk {
     if (this.x + 100 > this.parentTree.canvas.width) {
       this.parentTree.canvas.width = this.x + 70;
     }
-    if (this.level * 85 + 70 + 65 > this.parentTree.canvas.height) {
-      this.parentTree.canvas.height = this.level * 85 + 60 + 65;
+    if (this.level * 85 + 60 + 80 > this.parentTree.canvas.height) {
+      this.parentTree.canvas.height = this.level * 85 + 60 + 80;
     }
   }
 
@@ -306,9 +299,13 @@ class Perk {
     this.drawPerk("darkred");
 
     this.parentTree.canvas.addEventListener("click", (e) => {
+      //   let canvasBounds = this.parentTree.canvas.getBoundingRect();
+      //   let scaleX = this.parentTree.canvas.width / canvasBounds.width;
+      //   let scaleY = this.parentTree.canvas.height / canvasBounds.height;
+      const canvasRect = this.parentTree.canvas.getBoundingClientRect();
       const pos = {
-        x: e.clientX,
-        y: e.clientY,
+        x: e.clientX - canvasRect.left,
+        y: e.clientY - canvasRect.top,
       };
 
       if (this.isIntersect(pos)) {
