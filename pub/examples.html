@@ -14,14 +14,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="example.css" />
-    <title>Skill Tree Maker</title>
+    <title>SkillTree.js</title>
   </head>
     <body class="text-center">
 
       <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
         <header class="masthead mb-auto">
           <div class="inner">
-            <h3 class="masthead-brand">Skill Tree Maker</h3>
+            <h3 class="masthead-brand">SkillTree.js</h3>
             <nav class="nav nav-masthead justify-content-center">
               <a class="nav-link" href="#" onClick ="return show('home','docs', 'examples')">Home</a>
               <a class="nav-link" href="#" onClick ="return show('docs','examples', 'home')">Documentation</a>
@@ -32,7 +32,7 @@
 
         <main role="main" class="inner cover" id="home">
           <h1 class="cover-heading">Create simple yet robust skill trees.</h1>
-          <p class="lead">Skill Tree Maker is an easy to use Javascript library designed to help you to create elegant and powerful "skill trees" in your web application.</p>
+          <p class="lead">SkillTree.js is an easy to use Javascript library designed to help you to create elegant and powerful "skill trees" in your web application.</p>
           <!-- <p class="lead">
             <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
           </p> -->
@@ -42,43 +42,42 @@
           <p> 
             <br>
             <span class="heading"> Installation: </span>
-            Skill Tree Maker reqires no dependcies to work! <br>
-            Simply download the library and include the <span class="emphasis"> skill-tree-maker.js </span>script. 
-            Thats it!
+            SkillTree.js reqires no dependcies to work! <br>
+            Simply download the library and include the <span class="emphasis"> skilltree.js </span>script. 
+            Thats it! <br> (Please do not actually use this library, it's bad!)
           </p>
           <p>
             <span class="heading"> Getting Started: </span>
-            Skill Tree Maker has two objects which are used in every skill tree. 
-            The SkillTree [ST] object and the SkillTreeNode [STN] object.
-            STNs will always be instatiated as a part of an ST.
-            A very basic skill tree requires the following object to be passed in.
+            SkillTree.js has two objects which are used in every skill tree. 
+            The SkillTree object and the Perk object.
+            Perks will always be instatiated as a part of a SkillTree.
+            A very basic SkillTree requires the following object to be passed in.
           </p>
           <pre class="code"><code>            { 
-              <span class="code-highlight">svg</span>: the blank svg which will be used to create the skill tree
+              <span class="code-highlight">canvas</span>: the canvas element which will be used to create the skill tree
               <span class="code-highlight">title</span>: the title of the skill tree
               <span class="code-highlight">points</span>: the number of points the user is given
-              <span class="code-highlight">root</span>: a STN object which is the root of the tree 
+              <span class="code-highlight">root</span>: a Perk object which is the root of the tree 
             }</code></pre>
             <p>
-            It is recommended that the STN object be created right in the decleration to avoid surpurfluos code.
-            A very basic skill tree node requires the following object to be passed in: 
+            A very basic Perk object requires the following object to be passed in: 
             </p>
             <pre class="code"><code>            {
-                <span class="code-highlight">title</span>: the title of the STN
-                <span class="code-highlight">children</span>: a list of STN's direct descendants in the tree
+                <span class="code-highlight">title</span>: the title of the Perk
+                <span class="code-highlight">children</span>: a list of this Perk's direct descendants in the tree
             }</code></pre>
-            <p> An example of a very simple three node tree is here: </p>
+            <p> An example of a very simple three perk tree is here: </p>
             <pre class="code"><code>
-              <span class="code-highlight3">const</span> <span class="code-highlight5">ThreeNodeTree</span> = <span class="code-highlight3">new</span> <span class="code-highlight2">SkillTree</span> ({
-                <span class="code-highlight">svg</span>: document.getElementById(<span class="code-highlight4">"SkillTree"</span>),
-                <span class="code-highlight">title</span>: <span class="code-highlight4">"Three Nodes"</span>,
+              <span class="code-highlight3">const</span> <span class="code-highlight5">ThreePerkTree</span> = <span class="code-highlight3">new</span> <span class="code-highlight2">SkillTree</span> ({
+                <span class="code-highlight">canvas</span>: document.getElementById(<span class="code-highlight4">"SkillTree"</span>),
+                <span class="code-highlight">title</span>: <span class="code-highlight4">"Three Perk"</span>,
                 <span class="code-highlight">points</span>: 3,
-                <span class="code-highlight">root</span>: <span class="code-highlight3">new</span> <span class="code-highlight2">SkillTreeNode</span> ({
+                <span class="code-highlight">root</span>: <span class="code-highlight3">new</span> <span class="code-highlight2">Perk</span> ({
                   <span class="code-highlight">title</span>: <span class="code-highlight4">"Skill 1"</span>, 
                   <span class="code-highlight">children</span>: [ 
-                  <span class="code-highlight3">new</span> <span class="code-highlight2">SkillTreeNode</span> ({
+                  <span class="code-highlight3">new</span> <span class="code-highlight2">Perk</span> ({
                       <span class="code-highlight">title</span>: <span class="code-highlight4">"Skill 2"</span>
-                    }), <span class="code-highlight3">new</span> <span class="code-highlight2">SkillTreeNode</span> ({
+                    }), <span class="code-highlight3">new</span> <span class="code-highlight2">Perk</span> ({
                       <span class="code-highlight">title</span>: <span class="code-highlight4">"Skill 3"</span>
                     })
                   ]
@@ -87,25 +86,23 @@
             </code></pre> 
           </p>
           <p>
-            Finally, after creating the SkillTree as you like, <span class="emphasis"> you must run the .initialize() method! </span> <br>
+            Finally, after creating the SkillTree as you like, <span class="emphasis"> you must run the .initialize() method. </span> <br>
             Like so: 
             <pre class="code"><code>
-              <span class="code-highlight5">ThreeNodeTree</span>.intitalize();
+              <span class="code-highlight5">ThreePerkTree</span>.intitalize();
             </code></pre>
           </p>
           <p>
             <span class="heading"> Further Documentation: </span> <br>
-            Due to the nature of constructing the skill tree modification after creaton 
-            (i.e. after running .initialize) is limited, but the creation process is very robust.
           </p>
           <p>
             <span class="sub-heading"> SkillTree Constructor: </span> The SkillTree constructor has the following options:
             <br>
             <br>
-            <span class="options">svg</span> <br>
+            <span class="options">canvas</span> <br>
             <span class="suboptions">Type: </span> HTML Element <br>
             <span class="suboptions">Default: </span> None <br>
-            <span class="suboptions">Description: </span> Technically, the only *truly* required option. This takes an HTML SVG element that will be used to construct the skill tree. <br>
+            <span class="suboptions">Description: </span> Technically, the only *truly* required option. This takes an HTML canvas element that will be used to construct the skill tree. <br>
             <br>
             <span class="options">title</span> <br>
             <span class="suboptions">Type: </span> String <br>
@@ -120,8 +117,8 @@
             <span class="options">root</span> <br>
             <span class="suboptions">Type: </span> SkillTreeode <br>
             <span class="suboptions">Default: </span> None <br>
-            <span class="suboptions">Description: </span> This takes the STN instance which will be the root node of the skill tree, if left empty there will be no tree.<br>
-            <span class="suboptions">Note: </span>  It is possible to create all STNs here to avoid surpurfluos code, see ThreeNodeTree example above.<br>
+            <span class="suboptions">Description: </span> This takes the Perk instance which will be the root perk of the skill tree, if left empty there will be no tree.<br>
+            <span class="suboptions">Note: </span>  It is possible to create all Perks here to avoid surpurfluos code, see the ThreePerkTree example above.<br>
             <br>
             <span class="options">respec</span> <br>
             <span class="suboptions">Type: </span> boolean <br>
@@ -131,25 +128,23 @@
             <span class="options">free</span> <br>
             <span class="suboptions">Type: </span> boolean <br>
             <span class="suboptions">Default: </span> false <br>
-            <span class="suboptions">Description: </span> If set to true all skills within the skill tree will be free and points will not matter.<br>
+            <span class="suboptions">Description: </span> If set to true all skills within the skill tree will be free and points will not be displayed.<br>
             <br>           
           </p>
           <p>
-            <span class="sub-heading"> SkillTreeNode Constructor: </span> The SkillTreeNode constructor has the following options:
+            <span class="sub-heading"> Perk Constructor: </span> The Perk constructor has the following options:
             <br>
             <br>
             <span class="options">title</span> <br>
             <span class="suboptions">Type: </span>: String <br>
             <span class="suboptions">Default: </span> "" <br>
-            <span class="suboptions">Description: </span> Title of the skill which will be displayed below the node.<br>
-            <span class="suboptions">Note: </span> It is recommended that title of the skill not be longer than 10 characters as it will potentially overlap. <br>
+            <span class="suboptions">Description: </span> Title of the skill; which will be displayed below the perk.<br>
             <br>
             <span class="options">children</span> <br>
-            <span class="suboptions">Type: </span>: list[SKillTreeNode] <br>
+            <span class="suboptions">Type: </span>: list[Perk] <br>
             <span class="suboptions">Default: </span>: [] <br>
-            <span class="suboptions">Description: </span> The direct descendants of this node. <br>
-            <span class="suboptions">Note: </span> It is recommended to not have more than 10 skills on the same level as the width of the tree will be extremely large and the UI may start getting wonky. <br>
-            <span class="suboptions">Note 2: </span> SkillTreeNodes can be constructed direcrly in the decleration of the children. As seen in the ThreeNodeTree example. <br>
+            <span class="suboptions">Description: </span> The direct descendants of this Perk. <br>
+            <span class="suboptions">Note 2: </span> Perks can be constructed direcrtly in the decleration of the children. As seen in the ThreePerkTree example. <br>
             <br>
             <span class="options">cost</span> <br>
             <span class="suboptions">Type: </span> Number <br>
@@ -160,24 +155,46 @@
             <span class="options">image</span> <br>
             <span class="suboptions">Type: </span> String <br>
             <span class="suboptions">Default: </span> "" <br>
-            <span class="suboptions">Description: </span> This takes a path to an SVG image which will be displayed on the node.<br>
+            <span class="suboptions">Description: </span> This takes a path to an image which will be displayed on the perk.<br>
             <span class="suboptions">Note: </span> It is recommended that the image be sqaure or almost square or there may be weird distortion. <br>
             <br>
+          </p>
+          <p>
+            <span class="sub-heading"> SkillTree Methods: </span> The SkillTree class has the following methods:
+            <br>
+            <br>
+            <span class="options">.initialize();</span> : This method is to be called after all Perks have been instantiated and added to the skill tree. <br>
+            <span class="suboptions">Arguments: </span> None <br>
+            <br>
+            <span class="options">.addPoints(points: Number);</span> : This method is to be called after all Perks have been instantiated and added to the skill tree. <br>
+            <span class="suboptions">Arguments: </span> Takes a number which will be added to the current number of points, can be positive or negative. <br>
+          </p>
+          <p>
+            <span class="heading"> (Most Important) Known Bugs: </span>
+            <br> 
+            <ul>
+                <li> There are a lot, don't actually use this library please. </li>
+                <li> A suffeciently large/complex tree will likely break my implemnation of the tree drawing algorithm... currently trying to fix this.</li>
+            </ul>
+          </p>
+          <p>
+            <span class="heading"> Credits: </span>
+            <br> Made by Petar Jovic, originally for CSC309H1 Fall 2021 at the University of Toronto, but since modified. 
+            <br> This library heavily relies on an implemnation of the algorithm described by Christoph Buchheim et al. in the paper "Imporiving Walker's Algorithm to Run in Linear Time".
+            <br> Linked <a href="http://dirk.jivas.de/papers/buchheim02improving.pdf"> here. </a>
           </p>
         </div>
 
         <div class="examples" id="examples">
             <p> This library can be used to make traditional skills trees of the the sort you may see in a video game.</p>
-            <canvas id="canvas" class="example1"> This is an example skill tree. </canvas>
-            <!-- <p> It can also be used inovatively as a tracker for, say, an workout applicaiton to track which workouts the user has achieved, adding gamification elements to the app.</p>
-            <canvas id="canvas2" class="example2">
-              This is an example skill tree.
-              </canvas> -->
-          </div>
+            <canvas id="skillTree" class="example1"> This is an example skill tree. </canvas>
+            <p> It can also be used in more inovative was, such as a tracker for a workout applicaiton. Here it is used to track which workouts the user has achieved, adding gamification elements which encourge the user to coninue working out.</p>
+            <canvas id="exerciseTree" class="example2"> This is an example skill tree. </canvas>
+        </div>
 
         <footer class="mastfoot mt-auto">
           <div class="inner">
-            <p>Made by Petar Jovic for CSC309H1, Fall 2021.</p>
+            <p>Made by Petar Jovic.</p>
           </div>
         </footer>
 
