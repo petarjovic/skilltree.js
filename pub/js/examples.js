@@ -2,29 +2,33 @@
 
 const skillTree = new SkillTree({
   canvas: document.getElementById("skillTree"),
-  title: "Sample Skill Tree",
+  title: "Warrior Skill Tree",
   // free: true,
   respec: true,
-  points: 10,
+  points: 30,
   root: new Perk({
     title: "Attack 1",
-    image: "https://freesvg.org/img/Sword-Grayscale.png",
+    image: "https://www.svgrepo.com/show/276072/sword.svg",
     children: [
       new Perk({
         title: "Attack 2",
-        image: "https://freesvg.org/img/Sword-Grayscale.png",
+        image: "https://www.svgrepo.com/show/276072/sword.svg",
+        cost: 2,
         children: [
           new Perk({
             title: "Attack 3",
-            image: "https://freesvg.org/img/Sword-Grayscale.png",
+            image: "https://www.svgrepo.com/show/276072/sword.svg",
+            cost: 3,
             children: [
               new Perk({
                 title: "Attack 4",
-                image: "https://freesvg.org/img/Sword-Grayscale.png",
+                image: "https://www.svgrepo.com/show/276072/sword.svg",
+                cost: 4,
                 children: [
                   new Perk({
                     title: "Attack 5",
-                    image: "https://freesvg.org/img/Sword-Grayscale.png",
+                    cost: 10,
+                    image: "https://www.svgrepo.com/show/275522/sword.svg",
                   }),
                 ],
               }),
@@ -33,31 +37,63 @@ const skillTree = new SkillTree({
         ],
       }),
       new Perk({
-        title: "Attack Speed",
-        image: "https://freesvg.org/img/Wind--NicholasJudy456.png",
+        title: "Block 1",
+        image: "https://www.svgrepo.com/show/276068/shield.svg",
         children: [
           new Perk({
-            title: "AS 2",
-            image: "https://freesvg.org/img/Wind--NicholasJudy456.png",
+            title: "Block 2",
+            image: "https://www.svgrepo.com/show/276068/shield.svg",
+            cost: 2,
             children: [
               new Perk({
-                title: "AS 3",
-                image: "https://freesvg.org/img/Wind--NicholasJudy456.png",
-              }),
-              new Perk({
-                title: "AS 4",
-                image: "https://freesvg.org/img/Wind--NicholasJudy456.png",
-              }),
-              new Perk({
-                title: "AS 5",
-                image: "https://freesvg.org/img/9va-Cartoon_Tornado.png",
-                cost: 4,
+                title: "Block 3",
+                cost: 3,
+                image: "https://www.svgrepo.com/show/276068/shield.svg",
+                children: [
+                  new Perk({
+                    title: "Block 4",
+                    cost: 4,
+                    image: "https://www.svgrepo.com/show/276068/shield.svg",
+                  }),
+                ],
               }),
             ],
           }),
           new Perk({
-            title: "Multi Hit",
-            image: "https://freesvg.org/img/9va-Cartoon_Tornado.png",
+            title: "Parry",
+            image: "https://www.svgrepo.com/show/276071/sword.svg",
+            cost: 3,
+            children: [
+              new Perk({
+                title: "Parry 2",
+                image: "https://www.svgrepo.com/show/276071/sword.svg",
+                cost: 4,
+              }),
+            ],
+          }),
+        ],
+      }),
+      new Perk({
+        title: "Attack Speed",
+        cost: 2,
+        image: "https://www.svgrepo.com/show/235564/wind.svg",
+        children: [
+          new Perk({
+            title: "Attack Speed 2",
+            cost: 2,
+            image: "https://www.svgrepo.com/show/235564/wind.svg",
+            children: [
+              new Perk({
+                title: "Attack Speed 3",
+                cost: 3,
+                image: "https://www.svgrepo.com/show/235564/wind.svg",
+              }),
+              new Perk({
+                title: "Multi Hit",
+                image: "https://www.svgrepo.com/show/223553/tornado.svg",
+                cost: 5,
+              }),
+            ],
           }),
         ],
       }),
@@ -91,23 +127,20 @@ const workoutTree = new SkillTree({
       }),
       new Perk({
         title: "10 Pull Ups",
-        image:
-          "https://www.svgrepo.com/show/47033/pulling-up-training-silhouette.svg",
+        image: "https://www.svgrepo.com/show/212752/pull-up-gym.svg",
         children: [
           new Perk({
             title: "20 Pull Ups",
-            image:
-              "https://www.svgrepo.com/show/47033/pulling-up-training-silhouette.svg",
+            image: "https://www.svgrepo.com/show/212752/pull-up-gym.svg",
             children: [
               new Perk({
                 title: "30 Pull Ups",
-                image:
-                  "https://www.svgrepo.com/show/47033/pulling-up-training-silhouette.svg",
+                image: "https://www.svgrepo.com/show/212752/pull-up-gym.svg",
                 children: [
                   new Perk({
                     title: "40 Pull Ups",
                     image:
-                      "https://www.svgrepo.com/show/47033/pulling-up-training-silhouette.svg",
+                      "https://www.svgrepo.com/show/212752/pull-up-gym.svg",
                   }),
                 ],
               }),
@@ -126,6 +159,23 @@ const workoutTree = new SkillTree({
               new Perk({
                 title: "30 Min Run",
                 image: "https://www.svgrepo.com/show/119363/running.svg",
+                children: [],
+              }),
+            ],
+          }),
+        ],
+      }),
+      new Perk({
+        title: "10 Sit Ups",
+        image: "https://www.svgrepo.com/show/30271/fitness.svg",
+        children: [
+          new Perk({
+            title: "20 Sit Ups",
+            image: "https://www.svgrepo.com/show/30271/fitness.svg",
+            children: [
+              new Perk({
+                title: "30 Sit Ups",
+                image: "https://www.svgrepo.com/show/30271/fitness.svg",
               }),
             ],
           }),

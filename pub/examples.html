@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- This script handles the fake page switching.
+       The website is actually a static webpage it just uses CSS to hide/display different elements. -->
   <script> 
     function show(shown, hidden, hidden2) {
       document.getElementById(shown).style.display='block';
@@ -8,6 +10,7 @@
       return false;
     } 
   </script>
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,8 +19,10 @@
     <link rel="stylesheet" href="example.css" />
     <title>SkillTree.js</title>
   </head>
+  
     <body class="text-center">
 
+      <!-- Navigation Bar Thing -->
       <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
         <header class="masthead mb-auto">
           <div class="inner">
@@ -30,6 +35,7 @@
           </div>
         </header>
 
+        <!-- Home Page Below -->
         <main role="main" class="inner cover" id="home">
           <h1 class="cover-heading">Create simple yet robust skill trees.</h1>
           <p class="lead">SkillTree.js is an easy to use Javascript library designed to help you to create elegant and powerful "skill trees" in your web application.</p>
@@ -38,6 +44,7 @@
           </p> -->
         </main>
 
+        <!-- Documentation Page Below -->
         <div class="docs" id="docs"> 
           <p> 
             <br>
@@ -174,24 +181,32 @@
             <br> 
             <ul>
                 <li> There are a lot, don't actually use this library please. </li>
-                <li> A suffeciently large/complex tree will likely break my implemnation of the tree drawing algorithm... currently trying to fix this.</li>
+                <li> Certain tree shapes just break my implementation of the tree drawing algorithm for some reason... Currently working on this. </li>
+                <li> Depending on the tree, the title and tree may be visually off-centre with each other.</li>
             </ul>
           </p>
           <p>
             <span class="heading"> Credits: </span>
             <br> Made by Petar Jovic, originally for CSC309H1 Fall 2021 at the University of Toronto, but since modified. 
-            <br> This library heavily relies on an implemnation of the algorithm described by Christoph Buchheim et al. in the paper "Imporiving Walker's Algorithm to Run in Linear Time".
+            <br> This library heavily relies on an implementation of the algorithm described by Christoph Buchheim et al. in the paper "Imporiving Walker's Algorithm to Run in Linear Time".
             <br> Linked <a href="http://dirk.jivas.de/papers/buchheim02improving.pdf"> here. </a>
           </p>
         </div>
 
-        <div class="examples" id="examples">
-            <p> This library can be used to make traditional skills trees of the the sort you may see in a video game.</p>
+        <!-- Examples Page -->
+        <div class="examples" id="examples"> 
+            <br>
+            <p> This library can be used to make traditional skills trees of the the sort you may see in a video game. (P.s. Refunding is enabled on this tree.) </p>
             <canvas id="skillTree" class="example1"> This is an example skill tree. </canvas>
-            <p> It can also be used in more inovative was, such as a tracker for a workout applicaiton. Here it is used to track which workouts the user has achieved, adding gamification elements which encourge the user to coninue working out.</p>
+            <br>
+            <br>
+            <p> It can also be used in more inovative ways, such as a tracker for a workout applicaiton. Here it is used to track which workouts the user has achieved, adding gamification elements which encourge the user to coninue working out.</p>
             <canvas id="exerciseTree" class="example2"> This is an example skill tree. </canvas>
+            <br>
+            <p> All images shamelessly taken from <!-- <a href="https://freesvg.org"> freesvg.org</a> and --> <a href="https://www.svgrepo.com/"> svgrepo.com</a>. <font size="1.5"> <br> (So blame them if it takes a long time to load images.) </font> </p>
         </div>
 
+        <!-- Footer Below -->
         <footer class="mastfoot mt-auto">
           <div class="inner">
             <p>Made by Petar Jovic.</p>
@@ -202,6 +217,7 @@
 
     </body>
 
+    <!-- Scripts Loaded Here -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script defer src="js/skilltree.js"></script>
     <script defer src="js/examples.js"></script>

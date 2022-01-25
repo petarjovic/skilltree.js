@@ -334,7 +334,22 @@ class Perk {
     if (this.image.length !== 0) {
       const img = new Image();
       img.onload = () => {
-        this.parentTree.ctx.drawImage(img, this.rect.x, this.rect.y, 50, 50);
+        this.parentTree.ctx.drawImage(
+          img,
+          this.rect.x + 1,
+          this.rect.y + 1,
+          48,
+          48
+        );
+        if (!this.parentTree.free) {
+          this.parentTree.ctx.font = "13px Trebuchet MS";
+          this.parentTree.ctx.fillStyle = "white";
+          this.parentTree.ctx.fillText(
+            this.cost.toString(),
+            this.rect.x + 42,
+            this.rect.y + 47
+          );
+        }
       };
       img.src = this.image;
     }
@@ -346,7 +361,7 @@ class Perk {
       this.rect.width
     );
     if (!this.parentTree.free) {
-      this.parentTree.ctx.font = "12px Trebuchet MS";
+      this.parentTree.ctx.font = "13px Trebuchet MS";
       this.parentTree.ctx.fillStyle = "white";
       this.parentTree.ctx.fillText(
         this.cost.toString(),
