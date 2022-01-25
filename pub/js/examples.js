@@ -1,9 +1,11 @@
 "use strict";
-
+/**
+ * This skill tree is a enxample of a tradtional skill tree of the sort you may see in a video game.
+ * Respecing is enabled and the perks all cost various amounts to demostrate this functionality.
+ */
 const skillTree = new SkillTree({
   canvas: document.getElementById("skillTree"),
   title: "Warrior Skill Tree",
-  // free: true,
   respec: true,
   points: 30,
   root: new Perk({
@@ -100,7 +102,12 @@ const skillTree = new SkillTree({
     ],
   }),
 });
-
+/**
+ * This skill tree is an example of a more unique take on skill trees,
+ * it would theoretically be used to track a person's excercise progression.
+ * It is a free skill tree with no respecing (partly because that makes sense
+ * for the example partly to constrast with the above example.)
+ */
 const workoutTree = new SkillTree({
   canvas: document.getElementById("exerciseTree"),
   title: "Exercises",
